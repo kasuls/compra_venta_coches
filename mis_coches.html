@@ -45,7 +45,11 @@
 
 <h1>Mis coches.</h1>
 
-<button onclick="crear_tabla_mis_coches()">Cargar coches</button>
+<button onclick="crear_tabla_mis_coches()">Cargar coches
+    <li class="nav-item">
+        <a class="nav-link text-white" href="editar.html">editar</a>
+    </li>
+</button>
 
 <table>
     <thead>
@@ -57,10 +61,12 @@
             <th>Categoria</th> <!---Nuevo, KM0, Segunda Mano-->
             <th>Estado de compra</th> <!---Comprado o Disponible-->
             <th>Foto</th>
-            <th>Boton</th>
+            <th>Modificar</th>
+            <th>eliminar</th>
         </tr>
     </thead>
     <tbody id="tabla_mis_coches"></tbody>
+    
 </table>
 
 </body>

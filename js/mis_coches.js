@@ -35,6 +35,16 @@ async function crear_tabla_mis_coches() {
                     img.className = "imagen-coche";
                     celdaImagen.appendChild(img);
                 }
+                const celdaBotonn = fila.insertCell();
+                const boton_modificar = document.createElement("button");
+                boton_modificar.textContent = "Modificar";
+                boton_modificar.type = "button";
+
+                boton_modificar.onclick = function() {
+                    modificar_coche(coche._id,coche);
+                };
+                celdaBotonn.appendChild(boton_modificar)
+
                 const celdaBoton = fila.insertCell();
                 const boton = document.createElement("button");
                 boton.textContent = "Eliminar";
@@ -68,6 +78,52 @@ async function eliminar_coche(id_coche){
     .then(response => response.json())
     .then(data => {
         console.log(data);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+}
+async function modificar_coche(id_coche, coche) {
+    const token = localStorage.getItem("token");
+
+    const modelo = document.getElementById("modelo").value;
+    const precio = document.getElementById("precio").value;
+    const km = document.getElementById("km").value;
+    const descripcion = document.getElementById("descripcion").value;
+    const categoria = document.getElementById("categoria").value;
+    const imagen = document.getElementById("imagen").value;
+
+    const coche_modificado = {
+        name: modelo || coche.name,
+        price: precio !== "" ? Number(precio) : coche.price,
+        km: km !== "" ? Number(km) : coche.km,
+        category: categoria || coche.category,
+        description: descripcion || coche.description,
+        image: imagen || coche.image,
+        idUser: coche.idUser
+    };
+
+    const JSON_coche_modificado = JSON.stringify(coche_modificado);
+    let url = "https://practicaprogramacionweb.duckdns.org/cars/" + id_coche;
+
+    fetch(url, {
+        method: "PUT",
+        headers: {
+            "accept": "*/*",
+            "Authorization": "Bearer " + token,
+            "Content-Type": "application/json"
+        },
+        body: JSON_coche_modificado
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Error al modificar el coche");
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        crear_tabla_mis_coches();
     })
     .catch(error => {
         console.error(error);
