@@ -13,11 +13,38 @@
 
 <body>
 
+<h1>Coches disponibles.</h1>
+<body onload="carrito()">
+
+<script src="js/listado_coches.js"></script>
+<script src="https://cdn.datatables.net/3.1.4/js/dataTables.min.js"></script>
+
 <script src="js/navbar.js"></script>
 
 <div id="navbar"></div>
 
-<h1>Coches disponibles.</h1>
+<br><br><br><br>
+
+<h1>Mis coches.</h1>
+
+<button onclick="carrito()">Cargar coches</button>
+
+<table>
+    <thead>
+        <tr>
+            <th>Modelo</th>
+            <th>Precio</th>
+            <th>Kilómetros</th>
+            <th>Descripción</th>
+            <th>Categoria</th> <!---Nuevo, KM0, Segunda Mano-->
+            <th>Estado de compra</th> <!---Comprado o Disponible-->
+            <th>Foto</th>
+            <th>eliminar</th>
+        </tr>
+    </thead>
+    <tbody id="carrito"></tbody>
+    
+</table>
 
 </body>
 </html>

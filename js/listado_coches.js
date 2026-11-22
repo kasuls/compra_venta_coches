@@ -34,9 +34,33 @@ async function crear_tabla_todos_los_coches() {
                 img.className = "imagen-coche";
                 celdaImagen.appendChild(img);
             }
+            const celdaBoton = fila.insertCell();
+            const boton = document.createElement("button");
+            boton.className = "boton-carrito";
+            boton.textContent = "Añadir al carrito";
+            boton.type = "button";
+            boton.className = "boton-carrito";
+
+            boton.onclick = function() {
+                carrito(coche);
+            };
+
+            celdaBoton.appendChild(boton);
+            
         });
 
     } catch (error) {
         console.error("Error:", error);
     }   
+}
+function carrito(coche) {
+
+    let coches_carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    coches_carrito.push(coche);
+
+    localStorage.setItem("carrito", JSON.stringify(coches_carrito));
+
+    alert("Coche añadido al carrito");
+    
 }
